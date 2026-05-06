@@ -27,41 +27,15 @@
             border: 1px solid #dcdcdc;
         }
 
-        #cookie-consent h1 {
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-        }
-
-        #cookie-consent p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
+        #cookie-consent h1 { color: #2c3e50; margin-bottom: 25px; font-size: 1.8em; }
+        #cookie-consent p { font-size: 1.1em; line-height: 1.6; margin-bottom: 30px; }
         #cookie-consent button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            margin: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            background-color: #3498db; color: white; border: none;
+            padding: 15px 30px; margin: 10px; border-radius: 4px;
+            cursor: pointer; font-size: 1.1em; font-weight: bold;
         }
-
-        #cookie-consent button:last-of-type {
-            background-color: #95a5a6;
-        }
-
-        #credit-name {
-            margin-top: 25px;
-            font-size: 0.8em;
-            color: #bdc3c7;
-            font-style: italic;
-        }
+        #cookie-consent button:last-of-type { background-color: #95a5a6; }
+        #credit-name { margin-top: 25px; font-size: 0.8em; color: #bdc3c7; font-style: italic; }
 
         #jumpscare-container {
             display: none;
@@ -77,9 +51,12 @@
         }
 
         #jumpscare-video {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
+            /* Kekalkan horizontal, tak terpotong, tak berpusing */
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
         }
     </style>
 </head>
@@ -90,13 +67,11 @@
         <p>This website uses cookies to ensure you get the best experience. To proceed, please **confirm your cookie preferences** now.</p>
         <button id="accept-button" disabled>Accept & Proceed</button>
         <button id="decline-button" disabled>Decline & Exit</button>
-        
         <div id="credit-name">System Developer: Azfar 1A3</div>
     </div>
 
     <div id="jumpscare-container">
         <video id="jumpscare-video" playsinline preload="auto">
-            <!-- Nama video telah dikembalikan ke System_Files.txt.mp4 -->
             <source src="System_Files.txt.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -109,21 +84,16 @@
         const jumpscareContainer = document.getElementById('jumpscare-container');
         const jumpscareVideo = document.getElementById('jumpscare-video');
 
-        let videoReady = false;
-
         jumpscareVideo.load();
 
         jumpscareVideo.addEventListener('canplaythrough', () => {
-            videoReady = true;
             acceptButton.disabled = false;
             declineButton.disabled = false;
         });
 
         setTimeout(() => {
-            if (!videoReady) {
-                acceptButton.disabled = false;
-                declineButton.disabled = false;
-            }
+            acceptButton.disabled = false;
+            declineButton.disabled = false;
         }, 4000);
 
         function triggerJumpscare() {
