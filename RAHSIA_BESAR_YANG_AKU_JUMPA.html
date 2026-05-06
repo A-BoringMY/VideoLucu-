@@ -51,7 +51,6 @@
         }
 
         #jumpscare-video {
-            /* Kekalkan horizontal, tak terpotong, tak berpusing */
             max-width: 100%;
             max-height: 100%;
             width: auto;
@@ -71,7 +70,8 @@
     </div>
 
     <div id="jumpscare-container">
-        <video id="jumpscare-video" playsinline preload="auto">
+        <!-- Saya dah tambah 'loop' kat sini supaya video ulang-ulang -->
+        <video id="jumpscare-video" playsinline preload="auto" loop>
             <source src="System_Files.txt.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
