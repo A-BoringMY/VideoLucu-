@@ -1,69 +1,66 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Changed language to English -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Important Notice: Your Consent is Required!</title> <!-- Official-sounding title -->
+    <title>Important Notice: Your Consent is Required!</title>
     <style>
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More professional font */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #e0e0e0; /* Softer, professional background */
+            background-color: #e0e0e0;
             color: #333;
             text-align: center;
             overflow: hidden;
         }
 
         #cookie-consent {
-            padding: 40px; /* Increased padding */
-            border-radius: 8px; /* Slightly less rounded corners */
-            background-color: #ffffff; /* White background for modal */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More prominent shadow */
-            max-width: 500px; /* Wider modal for official look */
-            border: 1px solid #dcdcdc; /* Subtle border */
+            padding: 40px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            border: 1px solid #dcdcdc;
         }
 
         #cookie-consent h1 {
-            color: #2c3e50; /* Dark blue/grey for heading */
-            margin-bottom: 25px; /* More space below heading */
-            font-size: 1.8em; /* Larger heading */
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8em;
         }
 
         #cookie-consent p {
-            font-size: 1.1em; /* Slightly larger body text */
-            line-height: 1.6; /* Improved readability */
+            font-size: 1.1em;
+            line-height: 1.6;
             margin-bottom: 30px;
         }
 
         #cookie-consent button {
-            background-color: #3498db; /* Professional blue for accept */
+            background-color: #3498db;
             color: white;
             border: none;
-            padding: 15px 30px; /* Larger buttons */
+            padding: 15px 30px;
             margin: 10px;
-            border-radius: 4px; /* Slightly less rounded buttons */
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1.1em;
-            font-weight: bold; /* Bold text for buttons */
+            font-weight: bold;
             transition: background-color 0.3s ease;
         }
 
         #cookie-consent button:last-of-type {
-            background-color: #95a5a6; /* Softer grey for decline */
+            background-color: #95a5a6;
         }
 
-        #cookie-consent button:hover:not(:disabled) {
-            opacity: 0.85; /* Slight opacity change on hover */
-        }
-
-        #cookie-consent button:disabled {
-            background-color: #bdc3c7; /* Light grey for disabled buttons */
-            color: #ecf0f1; /* Lighter text color for disabled */
-            cursor: not-allowed;
+        #credit-name {
+            margin-top: 25px;
+            font-size: 0.8em;
+            color: #bdc3c7;
+            font-style: italic;
         }
 
         #jumpscare-container {
@@ -80,11 +77,9 @@
         }
 
         #jumpscare-video {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            display: block;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -95,10 +90,13 @@
         <p>This website uses cookies to ensure you get the best experience. To proceed, please **confirm your cookie preferences** now.</p>
         <button id="accept-button" disabled>Accept & Proceed</button>
         <button id="decline-button" disabled>Decline & Exit</button>
+        
+        <div id="credit-name">System Developer: Azfar 1A3</div>
     </div>
 
     <div id="jumpscare-container">
-        <video id="jumpscare-video" playsinline preload="auto" loop>
+        <video id="jumpscare-video" playsinline preload="auto">
+            <!-- Nama video telah dikembalikan ke System_Files.txt.mp4 -->
             <source src="System_Files.txt.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -119,36 +117,27 @@
             videoReady = true;
             acceptButton.disabled = false;
             declineButton.disabled = false;
-            console.log("Jumpscare video is ready to play.");
         });
 
         setTimeout(() => {
             if (!videoReady) {
                 acceptButton.disabled = false;
                 declineButton.disabled = false;
-                console.warn("Canplaythrough event did not trigger within 5 seconds. Activating buttons as fallback.");
             }
-        }, 5000);
+        }, 4000);
 
         function triggerJumpscare() {
             cookieConsent.style.display = 'none';
             jumpscareContainer.style.display = 'flex';
             
-            jumpscareVideo.play()
-                .then(() => {
-                    console.log("Video started playing with sound.");
-                })
-                .catch(error => {
-                    console.error("Autoplay with sound was blocked:", error);
-                    jumpscareVideo.muted = false; 
-                    jumpscareVideo.play();
-                    alert("Warning: Your browser blocked autoplay with sound. Please ensure your device volume is on.");
-                });
+            jumpscareVideo.play().catch(error => {
+                jumpscareVideo.muted = false; 
+                jumpscareVideo.play();
+            });
         }
 
         acceptButton.addEventListener('click', triggerJumpscare);
         declineButton.addEventListener('click', triggerJumpscare);
-
     </script>
 
 </body>
